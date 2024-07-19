@@ -41,7 +41,7 @@ wss.on('connection', (ws) => {
             // you could end the media stream here if you get dtmf 
 
             // Calling an arbitrary webhook with the DTMF digit
-            axios.post('https://mediastreamdtmf1.free.beeceptor.com', { dtmf: msg.dtmf })
+            axios.post('https://erikaswebhook.com', { dtmf: msg.dtmf })
                 .then(response => console.log('Webhook response:', response.data))
                 .catch(error => console.error('Error calling webhook:', error));
         } else {

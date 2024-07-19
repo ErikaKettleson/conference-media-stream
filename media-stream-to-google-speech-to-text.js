@@ -83,7 +83,7 @@ wss.on('connection', (ws) => {
                             console.log(`DTMF detected: ${dtmf}`);
 
                             // Call your webhook here
-                            axios.post('https://mediastreamdtmf1.free.beeceptor.com', { dtmf })
+                            axios.post('https://erikaswebhook.com', { dtmf })
                                 .then(response => console.log('Webhook response:', response.data))
                                 .catch(error => console.error('Error calling webhook:', error));
                         });
@@ -115,7 +115,7 @@ wss.on('connection', (ws) => {
             // msg console logged below
             // {
             // event: 'dtmf',
-            // streamSid: 'MZba1446879e7b1ead071924c68ebe570e',
+            // streamSid: 'MZxxxxxxx',
             // sequenceNumber: '131',
             // dtmf: { track: 'inbound', digit: '2' }
             // }
@@ -123,8 +123,8 @@ wss.on('connection', (ws) => {
             console.log(msg)
 
             // Call your webhook here
-            // i am just arbirationly calling an external webhook here
-            axios.post('https://mediastreamdtmf1.free.beeceptor.com', { dtmf: msg.dtmf })
+            // i am just arbirationly calling a webhook here
+            axios.post('https://erikaswebhook.com', { dtmf: msg.dtmf })
                 .then(response => console.log('Webhook response:', response.data))
                 .catch(error => console.error('Error calling webhook:', error));
         } else {
