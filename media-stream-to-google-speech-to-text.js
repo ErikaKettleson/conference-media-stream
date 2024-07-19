@@ -75,6 +75,7 @@ wss.on('connection', (ws) => {
                     console.log('Transcript:', transcript);
 
                     // Check for DTMF tones
+                    // this does not actually work bc google speech to text api does not support dtmf tones
                     const dtmfMatch = transcript.match(/[0-9]/g);
 
                     if (dtmfMatch) {
@@ -82,7 +83,7 @@ wss.on('connection', (ws) => {
                             console.log(`DTMF detected: ${dtmf}`);
 
                             // Call your webhook here
-                            axios.post('https://mediastreamdtmf.free.beeceptor.com', { dtmf })
+                            axios.post('https://mediastreamdtmf1.free.beeceptor.com', { dtmf })
                                 .then(response => console.log('Webhook response:', response.data))
                                 .catch(error => console.error('Error calling webhook:', error));
                         });
@@ -96,7 +97,7 @@ wss.on('connection', (ws) => {
     ws.on('message', (message) => {
         const msg = JSON.parse(message);
         if (msg.event === 'media') {
-            console.log('Received audio chunk, msg: ', msg);
+            // console.log('Received audio chunk, msg: ', msg);
 
             const chunk = Buffer.from(msg.media.payload, 'base64');
             if (recognizeStream && isStreamActive) {
@@ -110,6 +111,24 @@ wss.on('connection', (ws) => {
             } else if (!isStreamActive) {
                 initializeStream();
             }
+        } else if (msg.event === 'dtmf') {
+            // msg console logged below
+            // {
+            // event: 'dtmf',
+            // streamSid: 'MZba1446879e7b1ead071924c68ebe570e',
+            // sequenceNumber: '131',
+            // dtmf: { track: 'inbound', digit: '2' }
+            // }
+            console.log('DTMF detected:', msg.dtmf);
+            console.log(msg)
+
+            // Call your webhook here
+            // i am just arbirationly calling an external webhook here
+            axios.post('https://mediastreamdtmf1.free.beeceptor.com', { dtmf: msg.dtmf })
+                .then(response => console.log('Webhook response:', response.data))
+                .catch(error => console.error('Error calling webhook:', error));
+        } else {
+            console.log('Unhandled event type:', msg.event);
         }
     });
 
