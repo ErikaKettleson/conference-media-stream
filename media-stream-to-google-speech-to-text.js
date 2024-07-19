@@ -40,7 +40,7 @@ app.post('/voice', (req, res) => {
     connect.stream({
         url: `wss://ekettleson.ngrok.app/audio`,
     });
-    response.dial().conference('AMDConference');
+    response.dial().conference('MediaStreamConference');
     res.type('text/xml');
     res.send(response.toString());
 });
