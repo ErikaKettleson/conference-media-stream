@@ -5,12 +5,13 @@ Given a caller(s) in MediaStreamConference (here its hardcoded), add a ghost leg
 Run node media-stream-detect-dtmf.js if you want to just start a media stream and detect dtmf. 
 run node media-stream-google-speech-to-text.js if you want to start a media stream, send that audio to google speech to text api and get a trnascription back. 
 
-Make a TwiML bin and return this TwiML. I'm hardcoding MediaStreamConference here. Set the inbound webhook for some twilio number to this. That way you can call this number for testing puposes to have real people enter this conference. 
+Make a TwiML bin and use this TwiML. I'm hardcoding MediaStreamConference here but that could be dynamic.
 
 <img width="630" alt="Screenshot 2024-07-19 at 3 40 01 PM" src="https://github.com/user-attachments/assets/f11c557c-d3d0-4d1c-a10b-48869095f992">
 
-<img width="334" alt="Screenshot 2024-07-19 at 2 26 10 PM" src="https://github.com/user-attachments/assets/39cf2652-bc75-4a3a-a6c6-479436e1ccc1">
+ Set the inbound webhook for some twilio number to this. That way you can call this number for testing puposes to have real people enter this conference. 
 
+<img width="334" alt="Screenshot 2024-07-19 at 2 26 10 PM" src="https://github.com/user-attachments/assets/39cf2652-bc75-4a3a-a6c6-479436e1ccc1">
 
 Run this server locally. I'm using ngrok. Provision a new Twilio number to be our ghost number. Take the url and have that be the inbound voice webhook for that number (our ghost number).
 
