@@ -7,13 +7,13 @@ run node media-stream-google-speech-to-text.js if you want to start a media stre
 
 Make a TwiML bin and return this TwiML. I'm hardcoding MediaStreamConference here. Set the inbound webhook for some twilio number to this. That way you can call this number for testing puposes to have real people enter this conference. 
 
-<Response>
+'<Response>
     <Dial>
         <Conference 
             startConferenceOnEnter="true"
          >MediaStreamConference</Conference>
     </Dial>
-</Response>
+</Response>'
 
 Run this server locally. Provision a new Twilio number to be our ghost number. Take the url and have that be the inbound voice webhook for that number (our ghost number). We'll add this participant to the conference via the Conference Participant API. I've been doing this in the terminal like:
 
